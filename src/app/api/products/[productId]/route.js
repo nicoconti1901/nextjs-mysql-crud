@@ -34,6 +34,32 @@ export function PUT() {
   return NextResponse.json("Actualizando un producto");
 }
 
-export function DELETE() {
-  return NextResponse.json("Eliminando un producto");
+export async function DELETE(request, { params }) {
+  try {
+    const result = await conn.query("DELETE FROM product WHERE id = ?", [
+      params.productId,
+    ]);
+    if (!result.affectedRows) {
+      return NextResponse.json(
+        {
+          message: "Product not found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+    return new Response(null, {
+      status: 204,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
