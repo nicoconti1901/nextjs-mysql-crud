@@ -4,7 +4,7 @@ export const conn = mysql({
     config: {
         host: 'localhost',
         user: 'root',
-        password: 'root1901',
+        password: 'nico1901',
         port: 3306,
         database: 'nextjsmysqlcrud'
     }
